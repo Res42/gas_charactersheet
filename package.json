@@ -14,5 +14,5 @@
     "typescript": "^3.5.3"
   },
   "author": "Adam Reisinger",
-  "license": "ISC"
+  "license": "MIT"
 }
