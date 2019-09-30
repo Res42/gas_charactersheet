@@ -19,6 +19,7 @@ Examples:
 Current features / limitations:
 
 - Whitespaces are removed in the parsing step.
+- Supports `k`, `K`, `d` and `D` dice markers in the parsing step.
 - Supports substraction.
 - `1dX` can be shortened to `dX`.
 - The first token must be positive.
@@ -40,3 +41,12 @@ Input: a list of dice expressions.
 Returns the sum of multiple dice expressions.
 
 Usage: `DICESUM("3d6 + d3 + 5"; "d3 + 2"; "1")` will return `3d6 + 2d3 + 8`
+
+### Dice sum with dice marker format
+
+Function: `DICESUM2`  
+Input: a dice marker, like `d` in `3d6`. Currently only supports `k`, `K`, `d` and `D`.
+Input: a list of dice expressions.  
+Returns the sum of multiple dice expressions.
+
+Usage: `DICESUM2("k"; "3d6 + d3 + 5"; "d3 + 2"; "1")` will return `3k6 + 2k3 + 8`
