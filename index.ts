@@ -18,7 +18,21 @@ export function diceCount(input: string): number {
  * @returns {String} The summed dice expression.
  */
 export function diceSum(...inputs: string[]): string {
-  var sum = inputs.map(parseDices_)
+  var sum = inputs.map((i) => parseDices_(i))
     .reduce((acc, curr) => addDices_(acc, curr));
-  return formatDices_(sum);
+  return formatDices_(sum, "d");
+}
+
+/**
+ * Adds two or more dice expressions.
+ * A dice expression is like "3d6 + d3 + 5".
+ * @example DICESUM2("k", "3d6 + d3 + 5"; "d3 + 2"; "1") = "3k6 + 2k3 + 8"
+ * @param {String} diceMarker The dice marker to format the dice expression.
+ * @param {String} inputs A list of dice expressions.
+ * @returns {String} The summed dice expression.
+ */
+export function diceSum2(diceMarker: string = "d", ...inputs: string[]): string {
+  var sum = inputs.map((i) => parseDices_(i))
+    .reduce((acc, curr) => addDices_(acc, curr));
+  return formatDices_(sum, diceMarker);
 }

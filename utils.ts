@@ -7,9 +7,9 @@ const signMapper = {
 
 const CONSTANT_NAME = "constant";
 
-export function parseDices_(input: string): DiceExpression {
+export function parseDices_(input: string, diceMarker = "kKdD"): DiceExpression {
     const dice: DiceExpression = {};
-    const re = /([+-]?)\s*(\d*)([kKdD]?)(\d+)/g;
+    const re = new RegExp(`([+-]?)\s*(\d*)([${diceMarker}]?)(\d+)`, "g");
 
     let match = null;
     while ((match = re.exec(input)) != null) {
@@ -29,7 +29,7 @@ export function parseDices_(input: string): DiceExpression {
     return dice;
 }
 
-export function formatDices_(dice: DiceExpression, diceMarker = "k") {
+export function formatDices_(dice: DiceExpression, diceMarker = "d"): string {
     return Object.keys(dice).sort(diceSidesSorter_).reduce((formatted: string, side: string, index: number) => {
         const countOrConstant = dice[side] as number;
         const sign = countOrConstant > 0 ? "+" : "-";
@@ -44,7 +44,7 @@ export function formatDices_(dice: DiceExpression, diceMarker = "k") {
     }, "");
 }
 
-function diceSidesSorter_(side1: string, side2: string) {
+function diceSidesSorter_(side1: string, side2: string): number {
     if (side1 === CONSTANT_NAME && side2 === CONSTANT_NAME)
         return 0;
 
@@ -57,7 +57,7 @@ function diceSidesSorter_(side1: string, side2: string) {
     return parseInt(side2, 10) - parseInt(side1, 10);
 }
 
-export function diceCount_(dice: DiceExpression) {
+export function diceCount_(dice: DiceExpression): number {
     return Object.keys(dice)
         .filter(k => k !== CONSTANT_NAME)
         .reduce((acc, curr) => acc += dice[curr], 0);
