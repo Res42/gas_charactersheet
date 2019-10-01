@@ -14,5 +14,8 @@
     "typescript": "^3.5.3"
   },
   "author": "Adam Reisinger",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "url": "github:Res42/gas_charactersheet"
+  }
 }
